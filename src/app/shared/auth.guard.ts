@@ -2,6 +2,7 @@
  * Author: Prof Richard Krasso
  * Modified by: Eunice Lim
  * Date: 19 Aug 2021
+ * Title: auth.guard.ts
 */
 
 import { Injectable } from '@angular/core';
