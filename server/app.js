@@ -1,4 +1,11 @@
 /**
+ * Author: Prof Richard Krasso
+ * Modified by: Eunice Lim
+ * Date: 17 Aug 2021
+ * Title: app.js
+ */
+
+/**
  * Require statements
  */
 const express = require('express');
