@@ -1,3 +1,9 @@
+/**
+ * Author: Prof Richard Krasso
+ * Modified by: Eunice Lim
+ * Date: 19 Aug 2021
+*/
+
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,7 +22,7 @@ export class SigninComponent implements OnInit {
 
   constructor(private router: Router, private cookieService: CookieService, private fb: FormBuilder, private http: HttpClient){}
 
-  /** code comments */
+  /** To validate that empId is numbers in the form */
 
   ngOnInit(): void
   {
@@ -25,7 +31,7 @@ export class SigninComponent implements OnInit {
   })
 }
 
-/** code comments */
+/** the login portion  to return a value from the employees api. If empId is correct to take user to homepage. Otherwise show error message. */
 login(): void
 {
   const empId = this.form.controls['empId'].value;

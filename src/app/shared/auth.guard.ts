@@ -1,5 +1,7 @@
 /**
- * code attribution
+ * Author: Prof Richard Krasso
+ * Modified by: Eunice Lim
+ * Date: 19 Aug 2021
 */
 
 import { Injectable } from '@angular/core';
@@ -19,9 +21,9 @@ export class AuthGuard implements CanActivate
   }
   /**
    *
-   * @param route Code comments
-   * @param state
-   * @returns
+   * @param route Session User
+   * @param state false or true
+   * @returns true if user is logged in
    */
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
   {
