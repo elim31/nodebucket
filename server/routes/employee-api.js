@@ -1,14 +1,13 @@
 /**
  * Author: Prof Richard Krasso
  * Modified by: Eunice Lim
- * Date: 17 Aug 2021
+ * Date: 235 Aug 2021
  * Title: employee-api.js
- * Employee API for returning set employee ids.
+ * APIs for get, post, delete features
 */
 
 const express = require ('express');
-const { find } = require('../models/employee');
-const Employee = require ('../models/employee');
+const Employee = require('../models/employee');
 
 const router = express.Router();
 /**
@@ -26,7 +25,7 @@ router.get('/:empId', async (req,res) =>{
         if(err)
         {
           console.log(err);
-          res.status(500).send({
+          res.status(501).send({
             'message': 'MongoDB server error:' + err.message
           })
         }
@@ -38,7 +37,7 @@ router.get('/:empId', async (req,res) =>{
     })
   }
   /**
-   * Catch clause to catch any errors
+   * Catch clause to catch any errors on server
    */
   catch(e)
   {
@@ -49,4 +48,82 @@ router.get('/:empId', async (req,res) =>{
   }
 })
 
+/**
+ * findAllTasks API
+ */
+router.get('/:empId/tasks', async(req, res)=>{
+  try
+  {
+    Employee.findOne({'empId': req.params.empId}, 'empId todo done', function(err, employee){
+      if (err)
+      {
+        console.log(err);
+        res.status(501).send({
+          'message': 'MongoDB exception: ' + err.message
+        })
+      }
+      else{
+        console.log(employee);
+        res.json(employee);
+      }
+    })
+  }
+  catch(e)
+  {
+    console.log(e);
+    res.status(500).send({
+      'message': 'Internal server error: ' + e.message
+    })
+  }
+})
+
+/**
+ * createTask API
+ */
+
+router.post('/:empId/tasks', async(req, res)=>{
+  try
+  {
+    Employee.findOne({'empId': req.params.empId}, function(err, employee){ //pulling employee record
+      if (err)
+      {
+        console.log(err);
+        res.status(501).send({
+          'message': 'MongoDB Exception: ' + err.message
+        })
+      }
+      else
+      {
+        console.log(employee);
+
+        const newTask ={  //new task added to found employee record
+          text: req.body.text
+        };
+
+        employee.todo.push(newTask); //add todo field
+        employee.save(function(err, updatedEmployee){  //saving record
+          if (err)
+          {
+            console.log(err);
+            res.status(501).send({
+              'message': 'MongoDB Exception: ' + err.message
+            })
+          }
+          else
+          {
+            console.log(updatedEmployee);
+            res.json(updatedEmployee);    //updated record to angular
+          }
+        })
+      }
+    })
+  }
+  catch(e)
+  {
+    console.log(e);
+    res.status(500).send({
+      'message': 'Internal server error: ' + e.message
+    })
+  }
+})
 module.exports = router; //need to export file for SOAP UI to find it

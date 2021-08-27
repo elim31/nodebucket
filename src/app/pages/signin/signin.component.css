@@ -1,0 +1,15 @@
+.signin-container {    /** the middle box for sign in form*/
+  width: 25%;
+  margin: 15% auto;
+}
+
+.signin-title {
+  text-align: center;
+  font-size: 48px;
+  font-weight: lighter;
+}
+
+.signin-subtitle {
+  text-align: center;
+  font-weight: lighter;
+}

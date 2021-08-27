@@ -39,7 +39,7 @@ export class AuthGuard implements CanActivate
   {
     this.router.navigate(['/session/signin']);  //takes to sign in page if not authorized
     return false;
-  }
+    }
   }
 
 }
