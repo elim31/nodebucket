@@ -1,3 +1,10 @@
+/**
+ * Author: Prof Richard Krasso
+ * Modified by: Eunice Lim
+ * Date: 2 Sep 2021
+ * Title: app.component.ts
+*/
+
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +13,5 @@ import { Component } from '@angular/core';
   styles: [``]
 })
 export class AppComponent {
-  
+
 }

@@ -4,9 +4,8 @@
     <h1 class="title">
       Welcome to WEB 450's - nodebucket Project <br />
       <span class="subtitle">
-        Pay close attention to the requirements, double and triple check the
-        files for code attribution, and do not wait until the last minute to
-        begin working on each item.
+        An easy way to organize the never ending To Dos in your life.
+        Add tasks, delete them, move them and get 'em done!'
       </span>
     </h1>
   </div>
@@ -24,15 +23,13 @@
       <!--first column in row-->
       <div fxFlex>
         <mat-card class="mat-elevation-z0">
-          <mat-card-title> ToDo </mat-card-title>
+          <mat-card-title> To Do </mat-card-title>
 
           <mat-card-content>
             <div
               fxLayout="column"
               fxLayoutGap="10px"
-              ,
               class="task-column"
-              ,
               cdkDropList
               #todoList="cdkDropList"
               [cdkDropListData]="todo"
@@ -42,8 +39,7 @@
               <div *ngFor="let item of todo" cdkDrag>
                 <mat-card class="mat-elevation-z0 task-card">
                   <mat-card-content>
-                    <div fxLayout="row">
-                      <!--to add another entry below it-->
+                    <div fxLayout="row">               <!--to add another entry below it-->
 
                       <div fxFlex>
                         {{ item.text }}
@@ -83,8 +79,7 @@
                 <mat-card class="mat-elevation-z0 task-card">
                   <mat-card-content>
 
-                    <div fxLayout="row">
-                      <!--to add another entry below it-->
+                    <div fxLayout="row">    <!--to add another entry below it-->
 
                       <div fxFlex>
                         {{ item.text }}
@@ -95,13 +90,11 @@
                           <mat-icon color="accent">delete</mat-icon>
                         </button>
                       </div>
-
                     </div>
 
                   </mat-card-content>
                 </mat-card>
               </div>
-
             </div>
 
           </mat-card-content>

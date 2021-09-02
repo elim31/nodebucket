@@ -1,3 +1,11 @@
+/**
+ * Author: Prof Richard Krasso
+ * Modified by: Eunice Lim
+ * Date: 2 Sept 2021
+ * Title: base-response.js
+*/
+
+
 class BaseResponse{
   constructor(code,msg,data){
     this.code=code;

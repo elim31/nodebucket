@@ -58,12 +58,12 @@ router.get('/:empId/tasks', async(req, res)=>{
     Employee.findOne({'empId': req.params.empId}, 'empId todo done', function(err, employee){
       if (err)
       {
-        console.log(err);
+        console.log(err);     //error handling
         res.status(501).send({
           'message': 'MongoDB exception: ' + err.message
         })
       }
-      else{
+      else{         //successful call
         console.log(employee);
         res.json(employee);
       }
@@ -88,7 +88,7 @@ router.post('/:empId/tasks', async(req, res)=>{
     Employee.findOne({'empId': req.params.empId}, function(err, employee){ //pulling employee record
       if (err)
       {
-        console.log(err);
+        console.log(err);   //error handling
         res.status(501).send({
           'message': 'MongoDB Exception: ' + err.message
         })
@@ -105,7 +105,7 @@ router.post('/:empId/tasks', async(req, res)=>{
         employee.save(function(err, updatedEmployee){  //saving record
           if (err)
           {
-            console.log(err);
+            console.log(err);   //error handling
             res.status(501).send({
               'message': 'MongoDB Exception: ' + err.message
             })
@@ -138,7 +138,7 @@ router.put('/:empId/tasks', async(req, res)=>{
     Employee.findOne({'empId': req.params.empId}, function(err,employee){
       if (err)
       {
-        console.log(err);
+        console.log(err);   //error handling
         const updateTaskMongoErrorResponse = new BaseResponse('501', 'Mongo server error', err);
         res.status(501).send(updateTaskServerErrorResponse.toObject());
       }
@@ -146,7 +146,7 @@ router.put('/:empId/tasks', async(req, res)=>{
       {
         console.log(employee);
 
-        employee.set({
+        employee.set({       //successful call
           todo: req.body.todo,
           done: req.body.done
         })
@@ -154,13 +154,13 @@ router.put('/:empId/tasks', async(req, res)=>{
         employee.save(function(err, updatedEmployee){
           if (err)
           {
-            console.log(err);
+            console.log(err);    // error handling
             const updateTaskMongoOnSaveErrorResponse = new BaseResponse('501', 'Mongo server error', err);
             res.status(501).send(updateTaskServerErrorResponse.toObject());
           }
           else
           {
-            console.log(updatedEmployee);
+            console.log(updatedEmployee);    //successful call
             const updatedTaskSuccessRate  = new BaseResponse('200', 'Update successful', updatedEmployee);
             res.status(200).send(updatedTaskSuccessRate.toObject());
             }
@@ -185,14 +185,14 @@ router.delete('/:empId/tasks/:taskId', async(req, res) => {
   {
     Employee.findOne({'empId': req.params.empId}, function(err, employee){
       if (err){
-        console.log(err);
+        console.log(err);   //error handling
 
         const deleteTaskMongoErrorResponse = new BaseResponse('501', 'Mongo server error', err);
 
         res.status(501).send(deleteTaskMongoErrorResponse.toObject());
       }
       else{
-        console.log(employee);
+        console.log(employee);      //successful call
 
         const todoItem = employee.todo.find(item => item._id.toString() === req.params.taskId);
         const doneItem = employee.done.find(item => item._id.toString() === req.params.taskId);
@@ -201,11 +201,11 @@ router.delete('/:empId/tasks/:taskId', async(req, res) => {
           employee.toto.id(todoItem._id).remove(); //removing record from array
           employee.save(function(err, updatedTodoItemEmployee){
             if (err){
-              console.log(err);
+              console.log(err);  //error handling
               const deleteTodoItemMongoErrorResponse = new BaseResponse('501', 'Mongo server error', err);
               res.status(501).send(deleteTodoItemMongoErrorResponse.toObject());
             }
-            else{
+            else{   //successful call
               console.log(updatedTodoItemEmployee);
               const deleteTodoItemSuccessResponse = new BaseResponse('200', 'Item removed from the todo array', updatedTodoItemEmployee);
               res.status(200).send(updatedTodoItemEmployeeResponse.toObject());
@@ -215,20 +215,20 @@ router.delete('/:empId/tasks/:taskId', async(req, res) => {
         else if (doneItem){
           employee.done.id(doneItem._id).remove();
           employee.save(function(err, updateDoneItemEmployee){
-            if (err)
+            if (err) //error handling
             {
               console.log(err);
               const deleteDoneItemMongoErrorResponse = new BaseResponse('501', 'Mongo server error', err);
               res.status (501).send(deleteDoneItemMongoErrorResponse.toObject());
             }
              else{
-              console.log(updateDoneItemEmployee);
+              console.log(updateDoneItemEmployee);  //successful call
               const deleteDoneItemSuccessResponse = new BaseResponse('200', 'Item removed from the done array', updateDoneItemEmployee);
               res.status(200).send(deleteDoneItemSuccessResponse.toObject());
             }
           })
         }
-        else{
+        else{  //successful call
           console.log('Invalid taskId' + req.params.taskId);
           const deleteTasksNotFoundResponse = new BaseResponse('300', 'Unable to locate the requested resources', req.params.taskId);
           res.status(300).send(deleteTasksNotFoundResponse.toObject());
