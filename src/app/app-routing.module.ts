@@ -2,7 +2,8 @@
  * Title: app-routing.module.ts
  * Author: Professor Krasso
  * Modified by: Eunice Lim
- * Date: 25 Aug 2021
+ * Resources: https://www.geeksforgeeks.org/how-to-setup-404-page-in-angular-routing/
+ * Date: 1 Sep 2021
  * Description: Routing file
  */
 
@@ -14,6 +15,8 @@ import { AuthLayoutComponent } from './shared/auth-layout/auth-layout.component'
 import { SigninComponent } from './pages/signin/signin.component';
 import { AuthGuard } from './shared/auth.guard';
 import { ContactComponent } from './pages/contact/contact.component';
+import { AboutComponent } from './pages/about/about.component';
+import { NotfoundComponent } from './pages/notfound/notfound.component';
 
 const routes: Routes = [
   {
@@ -29,10 +32,15 @@ const routes: Routes = [
         path: 'contact',
         component: ContactComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'about',
+        component: AboutComponent,
+        canActivate: [AuthGuard]
       }
-    ]
+      ]
   },
-  {
+    {
     path: 'session',
     component: AuthLayoutComponent,
     children: [
@@ -40,9 +48,14 @@ const routes: Routes = [
         path: 'signin',
         component: SigninComponent
       }
-    ]
-  }
-];
+      ]
+    },
+    {
+      path: '**',
+      pathMatch: 'full',
+      component: NotfoundComponent
+    }
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true, enableTracing: false, scrollPositionRestoration: 'enabled', relativeLinkResolution: 'legacy' })],
