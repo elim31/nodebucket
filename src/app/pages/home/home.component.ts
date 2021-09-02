@@ -98,7 +98,12 @@ export class HomeComponent implements OnInit {
     else
     {
       //transferring items in the two arrays. containers are the arrays
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+        );
 
       console.log('Moved task item into the other container');
 
@@ -141,9 +146,9 @@ export class HomeComponent implements OnInit {
   private updateTaskList(empId: number, todo: Item[], done: Item[]): void {
     this.taskService.updateTask(this.empId, this.todo, this.done).subscribe(res => {
       this.employee = res.data;  //.data from base response
-    }, err =>{
+    }, err => {
       console.log(err);
-    }, () =>{
+    }, () => {
       this.todo= this.employee.todo;
       this.done = this.employee.done;
     })

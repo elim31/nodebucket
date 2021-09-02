@@ -12,3 +12,9 @@ p{
   padding: 10px;
   width: 50%
   }
+
+.img{
+  display: block;
+  text-align: center;
+  width: auto;
+    }

@@ -16,7 +16,7 @@ import { SigninComponent } from './pages/signin/signin.component';
 import { AuthGuard } from './shared/auth.guard';
 import { ContactComponent } from './pages/contact/contact.component';
 import { AboutComponent } from './pages/about/about.component';
-import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -37,23 +37,28 @@ const routes: Routes = [
         path: 'about',
         component: AboutComponent,
         canActivate: [AuthGuard]
-      }
-      ]
+      },
+     ]
   },
-    {
+  {
     path: 'session',
     component: AuthLayoutComponent,
     children: [
       {
         path: 'signin',
         component: SigninComponent
-      }
+      },
+      {
+        path: 'not-found',
+        component: NotFoundComponent
+        },
+
       ]
     },
     {
       path: '**',
       pathMatch: 'full',
-      component: NotfoundComponent
+      component: NotFoundComponent
     }
   ];
 
