@@ -61,13 +61,13 @@ router.get('/:empId/tasks', async(req, res)=>{
         console.log(err);     //error handling
         res.status(501).send({
           'message': 'MongoDB exception: ' + err.message
-        })
+        });
       }
       else{         //successful call
         console.log(employee);
         res.json(employee);
       }
-    })
+    });
   }
   catch(e)
   {
@@ -183,7 +183,7 @@ router.put('/:empId/tasks', async(req, res)=>{
 router.delete('/:empId/tasks/:taskId', async(req, res) => {
   try
   {
-    Employee.findOne({'empId': req.params.empId}, function(err, employee){
+    Employee.findOne({'empId': req.params.empId}, function(err, employee){ //find emp by id
       if (err){
         console.log(err);   //error handling
 
@@ -192,29 +192,29 @@ router.delete('/:empId/tasks/:taskId', async(req, res) => {
         res.status(501).send(deleteTaskMongoErrorResponse.toObject());
       }
       else{
-        console.log(employee);      //successful call
+        console.log(employee);      //find item in array
 
-        const todoItem = employee.todo.find(item => item._id.toString() === req.params.taskId);
-        const doneItem = employee.done.find(item => item._id.toString() === req.params.taskId);
+        const todoItem = employee.todo.find((item) => item._id.toString() === req.params.taskId);
+        const doneItem = employee.done.find((item) => item._id.toString() === req.params.taskId);
 
         if (todoItem){
-          employee.toto.id(todoItem._id).remove(); //removing record from array
-          employee.save(function(err, updatedTodoItemEmployee){
+          employee.todo.id(todoItem._id).remove(); //removing record from array if item is found
+          employee.save(function (err, updatedTodoItemEmployee){
             if (err){
-              console.log(err);  //error handling
+              console.log(err);  //error handling for database error
               const deleteTodoItemMongoErrorResponse = new BaseResponse('501', 'Mongo server error', err);
               res.status(501).send(deleteTodoItemMongoErrorResponse.toObject());
             }
             else{   //successful call
               console.log(updatedTodoItemEmployee);
               const deleteTodoItemSuccessResponse = new BaseResponse('200', 'Item removed from the todo array', updatedTodoItemEmployee);
-              res.status(200).send(updatedTodoItemEmployeeResponse.toObject());
+              res.status(200).send(deleteTodoItemSuccessResponse.toObject());
             }
-          })
+          });
         }
-        else if (doneItem){
+        else if (doneItem){  //remove item from done array
           employee.done.id(doneItem._id).remove();
-          employee.save(function(err, updateDoneItemEmployee){
+          employee.save(function (err, updatedDoneItemEmployee){
             if (err) //error handling
             {
               console.log(err);
@@ -222,20 +222,20 @@ router.delete('/:empId/tasks/:taskId', async(req, res) => {
               res.status (501).send(deleteDoneItemMongoErrorResponse.toObject());
             }
              else{
-              console.log(updateDoneItemEmployee);  //successful call
-              const deleteDoneItemSuccessResponse = new BaseResponse('200', 'Item removed from the done array', updateDoneItemEmployee);
+              console.log(updatedDoneItemEmployee);  //successful call
+              const deleteDoneItemSuccessResponse = new BaseResponse('200', 'Item removed from the done array', updatedDoneItemEmployee);
               res.status(200).send(deleteDoneItemSuccessResponse.toObject());
             }
-          })
+          });
         }
         else{  //successful call
           console.log('Invalid taskId' + req.params.taskId);
           const deleteTasksNotFoundResponse = new BaseResponse('300', 'Unable to locate the requested resources', req.params.taskId);
-          res.status(300).send(deleteTasksNotFoundResponse.toObject());
+          res.status(300).send(deleteTaskNotFoundResponse.toObject());
         }
       }
 
-    })
+    });
 
   }
   catch (e)
