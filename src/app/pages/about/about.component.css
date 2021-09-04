@@ -1,0 +1,25 @@
+p{
+  font-size: large;
+ }
+
+.about-container{
+  width: 70%;
+  margin: 5% auto;
+  padding: 5px;
+  min-height: 100vh;
+
+
+}
+
+.about{
+  padding: 5px;
+  width: 100%;
+  min-height: auto;
+
+  }
+
+.img{
+  display: block;
+  text-align: center;
+  width: auto;
+    }

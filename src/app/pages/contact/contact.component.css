@@ -1,4 +1,16 @@
 p{
 font-size: 20px;
+}
 
+.contact-container{
+  width: 50%;
+  margin: 5% auto;
+  min-height: 50%;
+}
+
+
+.mat-elevation-z0{
+  margin: 5% auto;
+  padding: 20px;
+  width: auto;
 }

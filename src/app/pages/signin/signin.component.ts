@@ -32,7 +32,7 @@ export class SigninComponent implements OnInit {
   })
 }
 
-/** the login portion  to return a value from the employees api. If empId is correct to take user to homepage. Otherwise show error message. */
+/** the login portion to return a value from the employees api. If empId is correct to take user to homepage. Otherwise show error message. */
 login(): void
 {
   const empId = this.form.controls['empId'].value;
@@ -40,7 +40,11 @@ login(): void
   this.http.get('/api/employees/' + empId).subscribe(res=> {
     if (res)
     {
-      this.cookieService.set('session_user', empId, 1);
+
+      sessionStorage.setItem('name', `${res['firstName']} ${res['lastName']}`);  //name of signed in employee
+
+      this.cookieService.set('session_user', empId, 1); //stores logged in user session
+
       this.router.navigate(['/']);
     }
     else

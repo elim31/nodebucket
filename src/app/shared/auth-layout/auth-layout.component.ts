@@ -1,3 +1,10 @@
+/**
+ * Author: Prof Richard Krasso
+ * Modified by: Eunice Lim
+ * Date: 2 Sept 2021
+ * Title: auth-layout.component.ts
+ */
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({
