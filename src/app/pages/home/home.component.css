@@ -5,16 +5,19 @@
   .title {
     text-align: center;
     font-weight: lighter;
+    font-family: 'Itim', cursive;
+    font-size: 38px;
   }
 
   .subtitle {
     text-align: center;
-    font-size: 14px;
+    font-size: 20px;
   }
 
   .task-container{
     width: 35%;
     margin: 0 auto;
+    font-family: 'Karla', sans-serif;
   }
 
   .task-column{
@@ -24,6 +27,7 @@
     border-radius: 4px;
     overflow: hidden;
     display: block;
+    font-family: 'Karla', sans-serif;
    }
 
    .task-card {
@@ -32,9 +36,13 @@
      border-bottom: solid 1px#ccc;
      min-height: 68px;
      height: 68px;
-     font-size: 14px;
+     font-size: 20px;
      box-sizing: border-box;
      justify-content: space-between;
      align-items: center;
+     font-family: 'Karla', sans-serif;
    }
 
+   .mat-card-title{
+     font-family: 'Itim', cursive;
+   }
